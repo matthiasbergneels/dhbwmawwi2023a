@@ -65,6 +65,8 @@ public class ArrayExample {
     fullNames[0][1] = "Berg-Neels";
     fullNames[1][0] = "Adrian";
     fullNames[1][1] = "Lueers";
+    fullNames[2][0] = "Claudia";
+    fullNames[2][1] = "Müller";
 
     System.out.println(fullNames[0][0] + " " + fullNames[0][1]);
     System.out.println(fullNames[1][0] + " " + fullNames[1][1]);
