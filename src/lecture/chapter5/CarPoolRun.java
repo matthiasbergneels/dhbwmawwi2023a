@@ -71,5 +71,7 @@ public class CarPoolRun {
       System.out.println("Beim warten ist etwas schief gegangen!");
     }
     System.out.println("Aktuelle Anzahl an Autos: " + Car.getCarCount());
+
+    System.out.println();
   }
 }
