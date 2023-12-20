@@ -2,7 +2,12 @@ package lecture.excursion.junit;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -71,8 +76,11 @@ class CalculatorTest {
     Assertions.assertEquals(-5.0, result);
   }
 
-  @ParameterizedTest(name = "{0} multiplied with {1} results in {3}")
-  @DisplayName("Basic Multiply-Test")
+  @Nested
+  @DisplayName("Test Cases for multiply-Method")
+  class MultiplyTestCases{
+  @ParameterizedTest(name = "{0} multiplied with {1} results in {2}")
+  @DisplayName("Multiply Test Case - parameterized by Source Inline-CSV")
   @CsvSource({
     "10.0, 10.0, 100.0",
     "0.0, 100.0, 0.0",
@@ -83,5 +91,35 @@ class CalculatorTest {
     double result = myTestCalculator.multiply(numberA, numberB);
 
     Assertions.assertEquals(expected, result);
+  }
+
+  @ParameterizedTest(name = "{0} multiplied with {1} should result in {2}")
+  @DisplayName("Multiply Test Case - parameterized by Source CSV-File")
+  @CsvFileSource(resources = "/multiplyTestCases.csv")
+  void multiplyParamterized(double numberA, double numberB, double expectedResult) {
+    System.out.println("multiply - Test");
+    double result = myTestCalculator.multiply(numberA, numberB);
+
+    assertEquals(expectedResult, result);
+  }
+
+  @ParameterizedTest(name = "{0} multiplied with {1} should result in {2}")
+  @DisplayName("Multiply Test Case - parameterized by Source Method")
+  @MethodSource("lecture.excursion.junit.CalculatorTest#provideMultiplyTestCases")
+  void multiplyParamterizedWithMethod(double numberA, double numberB, double expectedResult) {
+    System.out.println("multiply - Test");
+    double result = myTestCalculator.multiply(numberA, numberB);
+
+    assertEquals(expectedResult, result);
+  }
+  }
+
+
+  static Stream provideMultiplyTestCases(){
+    return Stream.of(
+      Arguments.of(10.0, 10.0, 100.0),
+      Arguments.of(5.0, 4.0, 20.0)
+      // ...
+    );
   }
 }
