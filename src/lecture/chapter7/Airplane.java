@@ -1,5 +1,7 @@
 package lecture.chapter7;
 
+import lecture.chapter8.NotEnoughFreeSlotsException;
+
 public class Airplane implements Bookable{
 
   private boolean[] seats;  // false -> frei; true -> gebucht
@@ -13,8 +15,11 @@ public class Airplane implements Bookable{
   }
 
   @Override
-  public boolean book(int slots) {
-    if(slots <= freeSlots()){
+  public boolean book(int slots) throws NotEnoughFreeSlotsException{
+    if(slots > freeSlots()) {
+      throw new NotEnoughFreeSlotsException(slots, freeSlots());
+    }
+
       for(int i = 0; i < seats.length; i++){
         if(slots > 0 && !seats[i]){
           seats[i] = true;
@@ -22,8 +27,6 @@ public class Airplane implements Bookable{
         }
       }
       return true;
-    }
-    return false;
   }
 
   @Override

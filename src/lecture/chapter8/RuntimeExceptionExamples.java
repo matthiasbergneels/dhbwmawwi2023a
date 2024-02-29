@@ -41,6 +41,14 @@ public class RuntimeExceptionExamples {
       System.out.println(e.getMessage());
     }
 
+    // Alternative:
+    if(simpleText != null){
+      System.out.println(simpleText.length());
+    } else {
+      System.out.println("Kein Text gesetzt!");
+    }
+
+
     System.out.println("Ende");
 
   }

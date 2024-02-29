@@ -22,7 +22,7 @@ public class Hotel implements Bookable, Comparable, Serializable {
   public boolean book(int slots) throws NotEnoughFreeSlotsException {
     if(slots > freeSlots()){
       // Ausnahme werfen
-      NotEnoughFreeSlotsException e = new NotEnoughFreeSlotsException();
+      NotEnoughFreeSlotsException e = new NotEnoughFreeSlotsException(slots, freeSlots());
       throw e;
     }
 
