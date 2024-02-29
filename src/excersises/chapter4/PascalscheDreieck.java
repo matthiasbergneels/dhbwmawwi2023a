@@ -5,7 +5,7 @@ public class PascalscheDreieck {
         final String PLATZHALTER = "\t";
         final int KLEINSTER_WERT = 1;
 
-        int ebenen = 5;
+        int ebenen = 8;
 
         int[][] pyramide = new int[ebenen][];
 

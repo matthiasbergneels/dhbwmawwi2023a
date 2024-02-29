@@ -1,5 +1,7 @@
 package lecture.chapter7;
 
+import lecture.chapter8.NotEnoughFreeSlotsException;
+
 public class TravelAgency {
 
   public static void main(String[] args) {
@@ -7,7 +9,7 @@ public class TravelAgency {
     Bookable[] bookableObjects = new Bookable[4];
 
     // Narrowing Cast
-    bookableObjects[0] = new Hotel(400);
+    bookableObjects[0] = new Hotel(100);
     bookableObjects[1] = new Airplane(100);
     bookableObjects[2] = new Hotel(250);
     bookableObjects[3] = new Airplane(800);
@@ -22,13 +24,17 @@ public class TravelAgency {
         currentHotel.cleanRooms();
       }
 
-      System.out.println("Freie Plätzte: " + currentBookableObject.freeSlots());
-      boolean bookingSuccessfull = currentBookableObject.book(100);
-      System.out.println("Buchung erfolgreich: " + bookingSuccessfull);
-      bookingSuccessfull = currentBookableObject.book(100);
-      System.out.println("Buchung erfolgreich: " + bookingSuccessfull);
-      System.out.println("Verbleibende freie Plätzte: " + currentBookableObject.freeSlots());
-
+      try {
+        System.out.println("Freie Plätzte: " + currentBookableObject.freeSlots());
+        boolean bookingSuccessfull = currentBookableObject.book(100);
+        System.out.println("Buchung erfolgreich: " + bookingSuccessfull);
+        bookingSuccessfull = currentBookableObject.book(100);
+        System.out.println("Buchung erfolgreich: " + bookingSuccessfull);
+        System.out.println("Verbleibende freie Plätzte: " + currentBookableObject.freeSlots());
+      }catch(NotEnoughFreeSlotsException e){
+        System.out.println("Problem beim buchen:");
+        System.out.println(e.getMessage());
+      }
 
     }
 
