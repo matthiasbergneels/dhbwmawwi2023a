@@ -28,7 +28,7 @@ public class TravelAgency {
         System.out.println("Freie Plätzte: " + currentBookableObject.freeSlots());
         currentBookableObject.book(200);
         System.out.println("Verbleibende freie Plätzte: " + currentBookableObject.freeSlots());
-      }catch(NotEnoughFreeSlotsException e){
+      } catch (NotEnoughFreeSlotsException e) {
         System.out.println("Problem beim buchen:");
         System.out.println(e.getMessage());
 
