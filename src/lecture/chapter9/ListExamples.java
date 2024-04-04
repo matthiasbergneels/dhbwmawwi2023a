@@ -96,6 +96,5 @@ public class ListExamples {
       System.out.println(currentVegetable);
     }
 
-
   }
 }
