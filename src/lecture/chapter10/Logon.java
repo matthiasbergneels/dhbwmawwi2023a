@@ -11,11 +11,7 @@ import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
 public class Logon extends JFrame {
-
-  private static final String ACTION_COMMAND_OK = "OK";
-  private static final String ACTION_COMMAND_CLOSE = "CLOSE";
-  private static final String ACTION_COMMAND_PRINT = "PRINT";
-
+  
   public Logon() throws ParseException {
     super();
     this.setTitle("Logon");
@@ -91,12 +87,8 @@ public class Logon extends JFrame {
 
     // create & assign Buttons
     JButton okButton = new JButton("Ok");
-    okButton.setActionCommand(ACTION_COMMAND_OK);
     JButton cancelButton = new JButton("Schließen");
-    cancelButton.setActionCommand(ACTION_COMMAND_CLOSE);
     JButton printButton = new JButton("Ausgabe");
-    printButton.setActionCommand(ACTION_COMMAND_PRINT);
-
 
     southPanel.add(okButton);
     southPanel.add(cancelButton);
