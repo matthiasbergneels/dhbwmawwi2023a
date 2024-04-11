@@ -1,7 +1,8 @@
 package lecture.chapter10;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 
 
@@ -11,7 +12,7 @@ import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
 public class Logon extends JFrame {
-  
+
   public Logon() throws ParseException {
     super();
     this.setTitle("Logon");
@@ -27,6 +28,24 @@ public class Logon extends JFrame {
     JFormattedTextField portField = new JFormattedTextField(new MaskFormatter("#####"));
     portField.setColumns(3);
 
+    myComboBox.addItemListener(new ItemListener() {
+      @Override
+      public void itemStateChanged(ItemEvent e) {
+        if(e.getStateChange() == ItemEvent.SELECTED){
+          System.out.println("Item: " + e.getItem());
+          System.out.println("State Change: " + e.getStateChange());
+          System.out.println("Parameter String: " + e.paramString());
+
+          if(e.getItem().equals("HTTP")){
+            portField.setText("80");
+          } else if(e.getItem().equals("FTP")){
+            portField.setText("21");
+          } else {
+            portField.setText("");
+          }
+        }
+      }
+    });
 
     // initialize Panels
     JPanel mainPanel = new JPanel(new BorderLayout());
@@ -93,6 +112,8 @@ public class Logon extends JFrame {
     southPanel.add(okButton);
     southPanel.add(cancelButton);
     southPanel.add(printButton);
+
+
 
     // create & assign Borders
     Border etchedBorder = BorderFactory.createEtchedBorder();
