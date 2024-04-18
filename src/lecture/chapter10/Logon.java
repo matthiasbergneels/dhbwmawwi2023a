@@ -127,6 +127,16 @@ public class Logon extends JFrame {
       System.out.println("Parameter String: " + e.paramString());
       System.out.println("Modifiers: " + e.getModifiers());
 
+      System.out.println(Integer.toBinaryString(e.getModifiers()));
+
+      System.out.println(Integer.toBinaryString(ActionEvent.ALT_MASK));
+
+      if((e.getModifiers() & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK){
+        System.out.println("Alt-/Optionen-Taste gedrückt");
+      } else {
+        System.out.println("Alt-/Optionen-Taste NICHT gedrückt");
+      }
+
       if(e.getActionCommand().equals(ACTION_CLOSE)){
         System.exit(0);
       } else if (e.getActionCommand().equals(ACTION_PRINT)){
