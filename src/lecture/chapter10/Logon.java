@@ -1,6 +1,8 @@
 package lecture.chapter10;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
@@ -13,14 +15,18 @@ import javax.swing.text.MaskFormatter;
 
 public class Logon extends JFrame {
 
+  public static final String ACTION_OK = "ACTION_OK";
+  public static final String ACTION_CLOSE = "ACTION_CLOSE";
+  public static final String ACTION_PRINT = "ACTION_PRINT";
+
   public Logon() throws ParseException {
     super();
     this.setTitle("Logon");
     this.setAlwaysOnTop(true);
     this.setName("Logon");
     this.setResizable(false);
-    // this.setUndecorated(true);
-    // this.setOpacity(0.5f);
+    //this.setUndecorated(true);
+    //this.setOpacity(0.5f);
 
     final String[] PROTOCOL_VALUE_HELP = {"FTP", "Telnet", "SMTP", "HTTP"};
     JComboBox<String> myComboBox = new JComboBox<>(PROTOCOL_VALUE_HELP);
@@ -110,10 +116,27 @@ public class Logon extends JFrame {
     JButton printButton = new JButton("Ausgabe");
 
     southPanel.add(okButton);
+    okButton.setActionCommand(ACTION_OK);
     southPanel.add(cancelButton);
+    cancelButton.setActionCommand(ACTION_CLOSE);
     southPanel.add(printButton);
+    printButton.setActionCommand(ACTION_PRINT);
 
+    ActionListener buttonListener = e -> {
+      System.out.println("ActionCommand: " + e.getActionCommand());
+      System.out.println("Parameter String: " + e.paramString());
+      System.out.println("Modifiers: " + e.getModifiers());
 
+      if(e.getActionCommand().equals(ACTION_CLOSE)){
+        System.exit(0);
+      } else if (e.getActionCommand().equals(ACTION_PRINT)){
+        System.out.println("Protokoll: " + myComboBox.getSelectedItem() + "; Port: " + portField.getText());
+      }
+    };
+
+    cancelButton.addActionListener(buttonListener);
+    okButton.addActionListener(buttonListener);
+    printButton.addActionListener(buttonListener);
 
     // create & assign Borders
     Border etchedBorder = BorderFactory.createEtchedBorder();
@@ -134,6 +157,44 @@ public class Logon extends JFrame {
 
     this.add(mainPanel);
 
+    // JMenuBar
+    JMenuBar myMenuBar = new JMenuBar();
+    JMenu fileMenu = new JMenu("File");
+
+    JMenuItem printMenuItem = new JMenuItem("Ausgabe");
+    printMenuItem.setActionCommand(ACTION_PRINT);
+    printMenuItem.addActionListener(buttonListener);
+    JMenuItem closeMenuItem = new JMenuItem("Schließen");
+    closeMenuItem.setActionCommand(ACTION_CLOSE);
+    closeMenuItem.addActionListener(buttonListener);
+
+    fileMenu.add(printMenuItem);
+    fileMenu.addSeparator();
+    fileMenu.add(closeMenuItem);
+
+    myMenuBar.add(fileMenu);
+    this.setJMenuBar(myMenuBar);
+
+
+    // AWT MenuBar
+    MenuBar myAwtMenuBar = new MenuBar();
+    Menu awtFileMenu = new Menu("File (AWT)");
+
+    MenuItem awtPrintMenuItem = new MenuItem("Ausgabe");
+    awtPrintMenuItem.setActionCommand(ACTION_PRINT);
+    awtPrintMenuItem.addActionListener(buttonListener);
+    MenuItem awtCloseMenuItem = new MenuItem("Beenden");
+    awtCloseMenuItem.setActionCommand(ACTION_CLOSE);
+    awtCloseMenuItem.addActionListener(buttonListener);
+
+    awtFileMenu.add(awtPrintMenuItem);
+    awtFileMenu.addSeparator();
+    awtFileMenu.add(awtCloseMenuItem);
+
+    myAwtMenuBar.add(awtFileMenu);
+    this.setMenuBar(myAwtMenuBar);
+
+
     // set JFrame behavior
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     this.pack();
@@ -143,7 +204,9 @@ public class Logon extends JFrame {
   public static void main(String[] args) throws ParseException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
     // Set cross-platform Java L&F (also called "Metal")
-    // UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+    System.out.println(UIManager.getLookAndFeel());
+    //UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+    //System.out.println(UIManager.getLookAndFeel());
 
     GraphicsDevice defaultScreenDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 
