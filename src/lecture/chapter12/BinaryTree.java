@@ -1,6 +1,6 @@
 package lecture.chapter12;
 
-public class BinaryNumberTree {
+public class BinaryTree {
 
   // TODO:
   // 1. Umstellen auf Generic
@@ -81,8 +81,6 @@ public class BinaryNumberTree {
         }
       }
     }
-
-    return false;
   }
 
   private class Node{
