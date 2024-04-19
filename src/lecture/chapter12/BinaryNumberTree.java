@@ -2,10 +2,6 @@ package lecture.chapter12;
 
 public class BinaryNumberTree {
 
-  // TODO:
-  // 1. Umstellen auf Generic
-  // 2. Ausgabe aller Elemente in der richtigen Reihenfolge --> vom kleinsten zum größten Element
-
   private Node root;
   private int size;
 
@@ -81,8 +77,6 @@ public class BinaryNumberTree {
         }
       }
     }
-
-    return false;
   }
 
   private class Node{

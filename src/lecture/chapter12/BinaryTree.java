@@ -1,6 +1,6 @@
 package lecture.chapter12;
 
-public class BinaryTree {
+public class BinaryTree<T extends Comparable> {
 
   // TODO:
   // 1. Umstellen auf Generic
@@ -9,8 +9,8 @@ public class BinaryTree {
   private Node root;
   private int size;
 
-  public boolean add(int data){
-    Node newNode = new Node(data);
+  public boolean add(T data){
+    Node<T> newNode = new Node<T>(data);
 
     if(root == null){
       root = newNode;
@@ -18,16 +18,16 @@ public class BinaryTree {
       return true;
     }
 
-    Node currentNode = root;
+    Node<T> currentNode = root;
     return add(currentNode, newNode);
   }
 
-  private boolean add(Node currentNode, Node newNode){
-    if(currentNode.getData() == newNode.getData()){
+  private boolean add(Node<T> currentNode, Node<T> newNode){
+    if(currentNode.getData().equals(newNode.getData())){
       return false;
     }
 
-    if(currentNode.getData() > newNode.getData()){
+    if((currentNode.getData()).compareTo(newNode.getData()) > 0){
       if(currentNode.getLeftNode() != null){
         add(currentNode.getLeftNode(), newNode);
       }else {
@@ -47,70 +47,103 @@ public class BinaryTree {
     return false;
   }
 
-  public boolean addIterativ(int data){
-    Node newNode = new Node(data);
 
+
+  // traversieren  (path traversal)
+
+  // in-order traversal auf Teilbaumebene: --> left - current - right
+
+  public void print(){
     if(root == null){
-      root = newNode;
-      size++;
-      return true;
+      System.out.println("Baum ist leer");
+      return;
     }
 
-    Node currentNode = root;
-
-    while(true) {
-      if (currentNode.getData() == newNode.getData()) {
-        return false;
-      }
-
-      if (currentNode.getData() > newNode.getData()) {
-        if (currentNode.getLeftNode() == null) {
-          currentNode.setLeftNode(newNode);
-          size++;
-          return true;
-        } else {
-          currentNode = currentNode.getLeftNode();
-        }
-      } else {
-        if (currentNode.getRightNode() == null) {
-          currentNode.setRightNode(newNode);
-          size++;
-          return true;
-        } else {
-          currentNode = currentNode.getRightNode();
-        }
-      }
+    printTree(root);
+  }
+  private void printTree(Node<T> currentNode){
+    if(currentNode.getLeftNode() != null){
+      printTree(currentNode.getLeftNode());
+    }
+    System.out.println(currentNode.getData());
+    if(currentNode.getRightNode() != null){
+      printTree(currentNode.getRightNode());
     }
   }
 
-  private class Node{
-    private int data;
-    private Node leftNode;
-    private Node rightNode;
+  // pre-order traversal auf Teilbaumebene: --> current - left - right
+  public void printPreOrder(){
+    if(root == null){
+      System.out.println("Baum ist leer");
+      return;
+    }
 
-    Node(int data){
+    printPreOrder(root);
+  }
+
+  private void printPreOrder(Node<T> currentNode){
+    System.out.println(currentNode.getData());
+
+    if(currentNode.getLeftNode() != null){
+      printTree(currentNode.getLeftNode());
+    }
+
+    if(currentNode.getRightNode() != null){
+      printTree(currentNode.getRightNode());
+    }
+  }
+
+
+  // post-order traversal auf Teilbaumebene: --> left - right - current
+
+  public void printPostOrder(){
+    if(root == null){
+      System.out.println("Baum ist leer");
+      return;
+    }
+
+    printPostOrder(root);
+  }
+  private void printPostOrder(Node<T> currentNode){
+    if(currentNode.getLeftNode() != null){
+      printTree(currentNode.getLeftNode());
+    }
+
+    if(currentNode.getRightNode() != null){
+      printTree(currentNode.getRightNode());
+    }
+
+    System.out.println(currentNode.getData());
+  }
+
+  private class Node<T>{
+    private T data;
+    private Node<T> leftNode;
+    private Node<T> rightNode;
+
+    Node(T data){
       this.data = data;
       this.leftNode = null;
       this.rightNode = null;
     }
 
-    public int getData() {
+    public T getData() {
       return data;
     }
 
-    public Node getLeftNode() {
+    public Node<T> getLeftNode() {
       return leftNode;
     }
 
-    public void setLeftNode(Node leftNode) {
+    public void setLeftNode(Node<T> leftNode) {
       this.leftNode = leftNode;
     }
 
-    public Node getRightNode() {
+    public Node<T> getRightNode() {
       return rightNode;
     }
 
-    public void setRightNode(Node rightNode) {
+    public void setRightNode(Node<T> rightNode) {
       this.rightNode = rightNode;
     }
   }
