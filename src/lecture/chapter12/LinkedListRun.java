@@ -10,5 +10,12 @@ public class LinkedListRun {
     numberList.add(80);
     numberList.add(45);
     numberList.add(10);
+
+    System.out.println("Anzahl Elemente: " + numberList.size());
+    numberList.printList();
+    numberList.remove(80);
+
+    System.out.println("Anzahl Elemente: " + numberList.size());
+    numberList.printList();
   }
 }
