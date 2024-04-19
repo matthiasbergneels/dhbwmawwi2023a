@@ -10,7 +10,7 @@ public class StackRun {
     wordStack.push("machen");
     wordStack.push("Wir");
 
-    while(wordStack.peek() != null){
+    while(wordStack.size() > 0){
       System.out.print(wordStack.pop() + " ");
     }
 
