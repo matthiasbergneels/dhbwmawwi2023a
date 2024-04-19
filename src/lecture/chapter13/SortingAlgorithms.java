@@ -1,5 +1,4 @@
 package lecture.chapter13;
-
 public class SortingAlgorithms {
 
   private static int quickSortSwapCount = 0;

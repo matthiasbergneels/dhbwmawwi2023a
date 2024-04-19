@@ -1,6 +1,5 @@
 package lecture.chapter13;
 
-import lecture.chapter13.SortingAlgorithms;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
