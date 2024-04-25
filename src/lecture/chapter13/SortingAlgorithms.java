@@ -16,15 +16,31 @@ public class SortingAlgorithms {
     int[] sorted = bubbleSort(toSort.clone());
     printArray(sorted);
 
+    System.out.println("Bubble Sort V1 sortiert: ");
+    sorted = bubbleSortV2(toSort.clone());
+    printArray(sorted);
+
+    System.out.println("Bubble Sort V1 sortiert: ");
+    sorted = bubbleSortV3(toSort.clone());
+    printArray(sorted);
+
 
   }
 
 
   public static int[] bubbleSort(int[] numbers){
 
-    int swapCount = 0;
+    long swapCount = 0;
     long startTime = System.nanoTime();
 
+    for(int i = 0; i < numbers.length; i++){
+      for(int j = 0; j < numbers.length - 1; j++){
+        if(numbers[j] > numbers[j+1]){
+          swap(numbers, j, j+1);
+          swapCount++;
+        }
+      }
+    }
 
     long stopTime = System.nanoTime();
 
@@ -33,6 +49,61 @@ public class SortingAlgorithms {
     return numbers;
   }
 
+
+  public static int[] bubbleSortV2(int[] numbers){
+
+    long swapCount = 0;
+    long startTime = System.nanoTime();
+
+    for(int i = numbers.length; i > 0; i--){
+      for(int j = 0; j < i-1; j++){
+        if(numbers[j] > numbers[j+1]){
+          // swap
+          swap(numbers, j, j+1);
+          swapCount++;
+        }
+      }
+    }
+
+    long stopTime = System.nanoTime();
+
+    printRuntimeDuration("BubbleSort V2", numbers.length, startTime, stopTime, swapCount);
+
+    return numbers;
+  }
+
+  public static int[] bubbleSortV3(int[] numbers){
+
+    int j = numbers.length - 1;
+    boolean swapped;
+    long swapCount = 0;
+
+    long startTime = System.nanoTime();
+
+    do{
+      swapped = false;
+
+      for(int i = 0; i < j; i++){
+        if(numbers[i] > numbers[i+1]){
+          swap(numbers, i, i+1);
+          swapped = true;
+          swapCount++;
+        }
+      }
+      j--;
+    }while(swapped);
+
+    long stopTime = System.nanoTime();
+
+    printRuntimeDuration("BubbleSort V3", numbers.length, startTime, stopTime, swapCount);
+
+    return numbers;
+  }
+
+
+
+
+
   private static void swap(int[] array, int a, int b) {
     int temp = array[a];
     array[a] = array[b];
@@ -40,13 +111,13 @@ public class SortingAlgorithms {
   }
 
   public static void printArray(int[] numbers){
-    for(int number : numbers){
-      System.out.print(number + ", ");
+    for(int i = 0; i < numbers.length; i++){
+      System.out.print(numbers[i] + ((i == numbers.length-1)?"" : ", "));
     }
     System.out.println();
   }
 
-  private static void printRuntimeDuration(String algorithmName, int elementCount, long startTime, long endTime, int swapCount){
+  private static void printRuntimeDuration(String algorithmName, int elementCount, long startTime, long endTime, long swapCount){
     long durationInNanoSeconds = endTime - startTime;
     long durationInMilliSeconds = (long) (durationInNanoSeconds / 10e5);
 
