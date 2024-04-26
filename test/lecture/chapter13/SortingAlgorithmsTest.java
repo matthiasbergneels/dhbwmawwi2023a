@@ -1,9 +1,6 @@
 package lecture.chapter13;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -27,6 +24,31 @@ class SortingAlgorithmsTest {
       assertTrue(isSorted(bubbleSortedArray));
     }
 
+    @Test
+    void bubbleSortV2() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV2(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
+    void bubbleSortV3() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV3(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
+    void selectionSort() {
+      int[] bubbleSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+
+    @Test
+    void quickSort() {
+      int[] bubbleSortedArray = SortingAlgorithms.quickSort(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
   }
 
 
@@ -44,6 +66,30 @@ class SortingAlgorithmsTest {
       assertTrue(isSorted(bubbleSortedArray));
     }
 
+    @Test
+    void bubbleSortV2() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV2(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
+    void bubbleSortV3() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV3(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
+    void selectionSort() {
+      int[] bubbleSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
+    @Disabled
+    void quickSort() {
+      int[] bubbleSortedArray = SortingAlgorithms.quickSort(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
   }
 
   @Nested
@@ -60,6 +106,30 @@ class SortingAlgorithmsTest {
       assertTrue(isSorted(bubbleSortedArray));
     }
 
+    @Test
+    void bubbleSortV2() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV2(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
+    void bubbleSortV3() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV3(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
+    void selectionSort() {
+      int[] bubbleSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
+    @Disabled
+    void quickSort() {
+      int[] bubbleSortedArray = SortingAlgorithms.quickSort(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
   }
 
 

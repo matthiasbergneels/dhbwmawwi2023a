@@ -82,7 +82,7 @@ public class OuterClass {
   }
 
   public void printSecondMessageFromInnerLocalClass(String message){
-    class InnerLocalClass {
+    class InnerLocalClass{
       public void printMessage(String message){
         System.out.println("Nachricht von: " + this.getClass() + " - " + message + "; OuterClass.id: " + id);
       }
